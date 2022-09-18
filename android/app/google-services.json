@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "51337671710",
+    "project_id": "plant-house-1b291",
+    "storage_bucket": "plant-house-1b291.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:51337671710:android:b4095e703234f7f56fea0f",
+        "android_client_info": {
+          "package_name": "com.example.plant_house"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "51337671710-pap8d1nur8bhdmmc5eojkot6mfs798e9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.plant_house",
+            "certificate_hash": "5a24b7de66efbafc46e0b34073dedc96dff9d509"
+          }
+        },
+        {
+          "client_id": "51337671710-84o921fan30aramei18rdifdinkole1j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxTQRimj5GP0b7ZCPbWIZ5vLY6GWEzWzA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "51337671710-84o921fan30aramei18rdifdinkole1j.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "51337671710-amca9l3hspto6b1l71lu4vb8iqvfm1a1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.planthouse.plantHouse"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
