@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'components/body.dart';
+import '../../Components/my_bottom_navbar.dart';
+import 'components/camera_screen.dart';
 
 class CamPage extends StatelessWidget {
   const CamPage({Key? key}) : super(key: key);
@@ -7,8 +8,11 @@ class CamPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text("Add Data"),
+      ),
       body: const Body(),
+      bottomNavigationBar: const MyBottomNavBar(),
     );
   }
 }

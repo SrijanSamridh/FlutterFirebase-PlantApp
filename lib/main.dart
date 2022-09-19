@@ -9,7 +9,14 @@ import 'UI/Screens/Profile/profile.dart';
 import 'UI/Screens/Scan/scan.dart';
 import 'UI/Screens/details/details_screen.dart';
 
-void main() {
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -51,6 +58,7 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
       routes: {
+        "/home": (context) => _buildWidget(),
         "/scan": (context) => const Scan(),
         "/login": (context) => LoginPage(press: signIn),
         "/details": (context) => const DetailsScreen(),

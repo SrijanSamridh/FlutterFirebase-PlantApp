@@ -39,10 +39,10 @@
               "client_type": 3
             },
             {
-              "client_id": "51337671710-amca9l3hspto6b1l71lu4vb8iqvfm1a1.apps.googleusercontent.com",
+              "client_id": "51337671710-7dd3v6n3o0jt23erj4m8037r2flrj9vi.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.planthouse.plantHouse"
+                "bundle_id": "com.example.plantHouse"
               }
             }
           ]

@@ -81,7 +81,7 @@ class LinearNavbar extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, '/scan');
+              Navigator.pushNamed(context, '/cam_page');
             },
             icon: const Icon(
               Icons.camera,
