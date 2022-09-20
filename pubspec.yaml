@@ -47,6 +47,9 @@ dependencies:
   path_provider: ^2.0.11
   firebase_storage: ^10.3.8
   cloud_firestore: ^3.4.8
+  geolocator: ^9.0.1
+  csv: ^5.0.1
+  universal_html: ^2.0.8
 
 
 dev_dependencies:

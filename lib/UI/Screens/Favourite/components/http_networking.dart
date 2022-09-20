@@ -14,22 +14,22 @@ class HttpNetworking extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       child: data != null
           ? ListView.builder(
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ListTile(
-              leading: CircleAvatar(
-                  backgroundImage: NetworkImage(data[index]["url"])),
-              title: Text(data[index]["title"]),
-              subtitle: Text("ID: ${data[index]["id"]}"),
-            ),
-          );
-        },
-        itemCount: data.length,
-      )
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ListTile(
+                    leading: CircleAvatar(
+                        backgroundImage: NetworkImage(data[index]["url"])),
+                    title: Text(data[index]["title"]),
+                    subtitle: Text("ID: ${data[index]["id"]}"),
+                  ),
+                );
+              },
+              itemCount: data.length,
+            )
           : const Center(
-        child: CircularProgressIndicator(),
-      ),
+              child: CircularProgressIndicator(),
+            ),
     );
   }
 }

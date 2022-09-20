@@ -71,7 +71,7 @@ class LinearNavbar extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, '/favourite');
+              Navigator.pushNamed(context, '/my_files');
             },
             icon: const Icon(
               Icons.favorite_border,

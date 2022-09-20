@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:plant_house/UI/Screens/MyFiles/my_files.dart';
 
 import 'UI/Screens/CameraPage/cam_page.dart';
 import 'UI/Screens/Favourite/favourite.dart';
@@ -62,6 +63,7 @@ class _MyAppState extends State<MyApp> {
         "/scan": (context) => const Scan(),
         "/login": (context) => LoginPage(press: signIn),
         "/details": (context) => const DetailsScreen(),
+        "/my_files": (context) => MyFiles(),
         "/favourite": (context) => const Favourite(),
         "/profile": (context) => const Profile(),
         "/cam_page": (context) => const CamPage(),

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:geolocator/geolocator.dart';
 
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -16,6 +17,21 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
+
+  var _locationMessage = "";
+
+  Future<void> getLocation() async{
+    await Geolocator.checkPermission();
+    await Geolocator.requestPermission();
+
+
+    var position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    setState(() {
+      _locationMessage = "Long: ${position.longitude}\nLat: ${position.latitude}";
+      _timeStamp = position.timestamp!;
+    });
+  }
+
   File? _image;
 
   Future getImage(ImageSource source) async {
@@ -34,14 +50,13 @@ class _BodyState extends State<Body> {
   }
 
   final TextEditingController _controllerTitle = TextEditingController();
-  final TextEditingController _controllerQuantity = TextEditingController();
+  final TextEditingController _controllerSubTitle = TextEditingController();
 
   GlobalKey<FormState> key = GlobalKey();
 
-  dynamic db = FirebaseFirestore.instance;
 
-
-  String imageUrl = '';
+  String _imageUrl = '';
+  late DateTime _timeStamp;
 
   @override
   Widget build(BuildContext context) {
@@ -62,17 +77,17 @@ class _BodyState extends State<Body> {
                           style: const TextStyle(color: Colors.black),
                           decoration: const InputDecoration(
                               icon: Icon(Icons.near_me),
-                              hintText: "Enter the name of the item",
+                              hintText: "Enter the Title",
                               labelText: "Image Title"),
                         ),
                         TextFormField(
-                          controller: _controllerQuantity,
+                          controller: _controllerSubTitle,
                           style: const TextStyle(color: Colors.black),
                           obscureText: false,
                           decoration: const InputDecoration(
-                              icon: Icon(Icons.production_quantity_limits),
-                              hintText: "Enter the quantity of the item",
-                              labelText: "Quantity"),
+                              icon: Icon(Icons.subtitles),
+                              hintText: "Enter the Sub Title",
+                              labelText: "Sub Title"),
                         ),
                       ],
                     ),
@@ -84,24 +99,29 @@ class _BodyState extends State<Body> {
                   child: ElevatedButton(
                     onPressed: () async {
                           String dataTitle = _controllerTitle.text;
-                          String dataQuantity = _controllerQuantity.text;
+                          String dataSubTitle = _controllerSubTitle.text;
+                          String imageLocation = _locationMessage;
+                          String imageInfo = _imageUrl;
+                          String timeStamp = _timeStamp.toString();
 
-                          if(dataTitle != "" || dataQuantity != ""){
+                          if(dataTitle != ""){
                             //Create a Map of data
                             Map<String, String> dataToSend = {
                               'title': dataTitle,
-                              'quantity': dataQuantity
+                              'subTitle': dataSubTitle,
+                              'location': imageLocation,
+                              'imageURL': imageInfo,
+                              'time': timeStamp
                             };
 
                             //Add a new data
                             CollectionReference ref = FirebaseFirestore.instance.collection('Plant_data');
                             ref.add(dataToSend);
 
-                            print('lalalalallal done');
-                            _controllerQuantity.clear();
-                            _controllerQuantity.clear();
+                            _controllerTitle.clear();
+                            _controllerSubTitle.clear();
                           }
-
+                          Navigator.pushReplacementNamed(context, '/my_files');
                       },
                     style: ElevatedButton.styleFrom(
                         elevation: 12.0,
@@ -112,7 +132,7 @@ class _BodyState extends State<Body> {
                 ),
                 const SizedBox(height: 40),
                 _image != null
-                    ? Image.file(_image!, fit: BoxFit.cover)
+                    ? Image.file(_image!, width: 250, height: 250, fit: BoxFit.cover)
                     : Image.asset("assets/icons/AppLogo.jpg"),
               ],
             ),
@@ -124,7 +144,7 @@ class _BodyState extends State<Body> {
 
           ImagePicker imagePicker = ImagePicker();
           XFile? file = await imagePicker.pickImage(source: ImageSource.camera);
-          print('${file?.path}');
+          // print('${file?.path}');
 
           if(file == null) return;
           // Unique path string
@@ -136,15 +156,15 @@ class _BodyState extends State<Body> {
 
           // creating the final file where the images will be stored
           Reference referenceImageToUpload = referenceDirImages.child(uniqueFileName);
-
+          getLocation();
+          _image = File(file.path);
           try{
             // store the file
             await referenceImageToUpload.putFile(File(file.path));
             // Success: get the download URl
-            imageUrl = await referenceImageToUpload.getDownloadURL();
+            _imageUrl = await referenceImageToUpload.getDownloadURL();
           }catch(error){
             // some error occurred
-
           }
         },
         child: const Icon(Icons.camera_alt_outlined),
